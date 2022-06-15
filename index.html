@@ -19,6 +19,24 @@
         5.備注:
             1.計算屬性最終會出現在vm上 直接讀取使用即可
             2.如果計算屬性要被修改 那必須寫set函數去響應修改 且set中要引起計算時依賴的數據發生
+        6.object.defineproperty的getter和setter
+            JS的原生功能，可以在物件內使用 `get` 及 `set` 進行對屬性的讀取及寫入，如
+            let item = {
+                name: "book",
+                _price: 100,
+                priceWithTax: 100 * 1.2,
+                set price(newPrice) {
+                    this._price = newPrice;
+                    this.priceWithTax = this._price * 1.2;
+                },
+                get price() {
+                    return this._price;
+                }
+            }
+            雖然item物件中沒有price屬性，但是可以使用set跟get來建立一個虛擬的屬性
+            當輸入 item.price = 200 時，會同時改變`_price`及`priceWithTax`。
+            _price 是存放price值的真實屬性，前面的底線無程式上的用途，只是告訴其他開發者這個屬性不想被直接使用
+            若只設定get沒有set，則可建立一個唯讀屬性。            
 -->
 <body>
     
